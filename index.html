@@ -1223,6 +1223,30 @@
   .footer-logo span {
     color: #A78BFA;
   }
+  .feature-row,
+  .feature-row.reverse {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+    padding: 34px 24px;
+  }
+  .feature-text {
+    width: 100%;
+  }
+  .feature-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+    border-radius: 18px;
+    overflow: hidden;
+  }
+  .feature-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 16px;
+  }
 </style>
 </head>
 <body>
@@ -1311,22 +1335,22 @@
   <!-- 3: 텍스트 왼쪽 / 이미지 오른쪽 -->
   <div class="feature-row">
     <div class="feature-text">
-      <div class="feature-title">나의 패턴이<br>자기이해 Map으로<br>저장됩니다.</div>
-      <div class="feature-desc">한 번의 리포트로 끝나지 않습니다. 기록이 쌓일수록 나의 회피 루프, 몰입 조건, 위험 신호, 강점이 계속 업데이트됩니다.</div>
+      <div class="feature-title">매일의<br>행동강령으로<br>바뀝니다.</div>
+      <div class="feature-desc">Proof는 단순히 분석만 하지 않습니다. 오늘 발견한 패턴을 바탕으로 내일 바로 실행할 수 있는 한 줄 행동 규칙을 제안합니다.</div>
     </div>
     <div class="feature-image">
-      <img src="image/mock 3.png" alt="자기이해 Map 업데이트">
+      <img src="image/mock 3.png" alt="행동강령 업데이트">
     </div>
   </div>
 
   <!-- 4: 이미지 왼쪽 / 텍스트 오른쪽 -->
   <div class="feature-row reverse">
     <div class="feature-text">
-      <div class="feature-title">매일의<br>행동강령으로<br>바뀝니다.</div>
-      <div class="feature-desc">Proof는 단순히 분석만 하지 않습니다. 오늘 발견한 패턴을 바탕으로 내일 바로 실행할 수 있는 한 줄 행동 규칙을 제안합니다.</div>
+      <div class="feature-title">나의 패턴이<br>자기이해 Map으로<br>저장됩니다.</div>
+      <div class="feature-desc">한 번의 리포트로 끝나지 않습니다. 기록이 쌓일수록 나의 회피 루프, 몰입 조건, 위험 신호, 강점이 계속 업데이트됩니다.</div>
     </div>
     <div class="feature-image">
-      <img src="image/mock 4.png" alt="행동강령 업데이트">
+      <img src="image/mock 4.png" alt="자기이해 Map 업데이트">
     </div>
   </div>
 </section>
