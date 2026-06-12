@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Proof - 나는 왜 매번 같은 방식으로 무너질까?</title>
+<meta property="og:title" content="Proof"/>
+<meta property="og:description" content="GPT 대화, 회고, 메모, 실패 기록을 학습해 나의 패턴을 자기이해 Map으로 저장하고 매일의 행동강령으로 업데이트하는 AI 자기이해 시스템"/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html {
+    background: #fff;
+  }
+  body {
+    font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #F4F2FF;
+    color: #1A1040;
+    overflow-x: hidden;
+    max-width: 430px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  /* ───── HERO ───── */
+  .hero {
+    background: linear-gradient(160deg, #EDE9FF 0%, #F0EEFF 50%, #E8F0FF 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .hero-copy {
+    padding: 54px 24px 0;
+    position: relative;
+    z-index: 1;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: -30%;
+    width: 70%;
+    height: 60%;
+    background: radial-gradient(circle, rgba(124,92,252,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    background: rgba(124,92,252,0.1);
+    color: #7C5CFC;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 100px;
+    margin-bottom: 20px;
+    letter-spacing: 0.02em;
+  }
+  .hero-headline {
+    font-size: clamp(30px, 8.5vw, 48px);
+    font-weight: 900;
+    line-height: 1.2;
+    color: #1A1040;
+    letter-spacing: -0.03em;
+    margin-bottom: 6px;
+  }
+  .hero-headline em {
+    font-style: normal;
+    color: #7C5CFC;
+  }
+  /* 히어로 이미지 */
+  .hero-image-wrap {
+    width: calc(100% + 48px);
+    margin: 24px -24px 0;
+    overflow: hidden;
+    position: relative;
+  }
+  .hero-image-wrap img {
+    width: 100%;
+    display: block;
+  }
+  .hero-image-wrap .hero-cta {
+    position: absolute;
+    bottom: 0%;
+    left: 5%;
+    right: 5%;
+    transform: none;
+    width: 90%;
+    max-width: none;
+    margin: 0;
+    padding: 8% 0 18% 0;
+    background: transparent;
+    box-shadow: none;
+    opacity: 0;
+    font-size: 0;
+    cursor: pointer;
+  }
+  /* 이미지 없을 때 플레이스홀더 */
+  .hero-image-placeholder {
+    width: calc(100% + 48px);
+    height: 480px;
+    margin: 24px -24px 28px;
+    background: linear-gradient(135deg, #E8E2FF, #D8EEFF);
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: #9B8EC4;
+    font-size: 13px;
+    box-shadow: 0 20px 60px rgba(124,92,252,0.12);
+  }
+  .hero-image-placeholder span { font-size: 48px; }
+  .hero-sub {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1A1040;
+    line-height: 1.6;
+    margin-bottom: 6px;
+  }
+  .hero-sub-small {
+    font-size: 13px;
+    color: #7A6AAA;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+  .hero-cta {
+    background: linear-gradient(90deg, #7C5CFC 0%, #5B8EFF 100%);
+    color: #fff;
+    font-size: 17px;
+    font-weight: 900;
+    padding: 18px 28px;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    max-width: 340px;
+    box-shadow: 0 8px 28px rgba(124,92,252,0.35);
+    letter-spacing: -0.01em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+  .hero-scroll-hint {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    color: rgba(124,92,252,0.4);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+  }
+  .scroll-dot {
+    width: 1px; height: 24px;
+    background: linear-gradient(to bottom, rgba(124,92,252,0.4), transparent);
+    animation: scrollDown 1.5s ease-in-out infinite;
+  }
+  @keyframes scrollDown {
+    0%,100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  /* ───── TICKER ───── */
+  .ticker-wrap {
+    overflow: hidden;
+    background: linear-gradient(90deg, #7C5CFC, #5B8EFF);
+    padding: 11px 0;
+    white-space: nowrap;
+  }
+  .ticker-track {
+    display: inline-flex;
+    animation: ticker 22s linear infinite;
+  }
+  .ticker-item { font-size: 12px; font-weight: 700; color: #fff; padding: 0 20px; }
+  .ticker-dot { color: rgba(255,255,255,0.4); padding: 0 2px; }
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ───── COMMON SECTION ───── */
+  .section { padding: 64px 24px; }
+  .section-label {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #7C5CFC;
+    background: rgba(124,92,252,0.1);
+    padding: 4px 12px;
+    border-radius: 100px;
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-size: clamp(22px, 6vw, 30px);
+    font-weight: 900;
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    color: #1A1040;
+  }
+  .section-body {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #6B5B95;
+  }
+
+  /* ───── PROBLEM ───── */
+  .problem-bg { background: #F4F2FF; }
+  .problem-quote {
+    background: #fff;
+    border-left: 4px solid #7C5CFC;
+    padding: 18px;
+    border-radius: 0 16px 16px 0;
+    margin: 24px 0;
+    font-size: 14px;
+    font-style: italic;
+    color: #3D2D80;
+    line-height: 1.7;
+    box-shadow: 0 2px 12px rgba(124,92,252,0.07);
+  }
+  .problem-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .problem-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: #3D2D80;
+    line-height: 1.6;
+    background: #fff;
+    padding: 14px 16px;
+    border-radius: 14px;
+    box-shadow: 0 2px 10px rgba(124,92,252,0.06);
+  }
+  .problem-list li::before {
+    content: '😮';
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  /* ───── HOW IT WORKS ───── */
+  .how-bg {
+    background: linear-gradient(160deg, #EDE9FF 0%, #E8F0FF 100%);
+  }
+  .how-bg .section-label { color: #5B4AC8; background: rgba(91,74,200,0.1); }
+  .how-bg .section-title { color: #1A1040; }
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 32px;
+  }
+  .step {
+    background: #fff;
+    border-radius: 20px;
+    padding: 20px 18px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    box-shadow: 0 4px 16px rgba(124,92,252,0.08);
+  }
+  .step-num {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #7C5CFC, #5B8EFF);
+    color: #fff;
+    font-weight: 900;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .step-content { flex: 1; }
+  .step-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1A1040;
+    margin-bottom: 6px;
+  }
+  .step-desc {
+    font-size: 13px;
+    color: #6B5B95;
+    line-height: 1.65;
+  }
+  .step-tag {
+    display: inline-block;
+    background: rgba(124,92,252,0.1);
+    color: #6040D8;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 100px;
+    margin-top: 8px;
+  }
+
+  /* ───── FEATURE ───── */
+  .feature-bg { background: #F4F2FF; }
+  .feature-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 32px 20px;
+    border-bottom: 1px solid rgba(124,92,252,0.08);
+  }
+  .feature-row:last-child { border-bottom: none; }
+  .feature-row.reverse { flex-direction: row-reverse; }
+  .feature-text { flex: 1; min-width: 0; }
+  .feature-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    color: #7C5CFC;
+    background: rgba(124,92,252,0.1);
+    padding: 3px 10px;
+    border-radius: 100px;
+    margin-bottom: 10px;
+    letter-spacing: 0.04em;
+  }
+  .feature-title {
+    font-size: 16px;
+    font-weight: 900;
+    color: #1A1040;
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .feature-desc {
+    font-size: 11px;
+    color: #6B5B95;
+    line-height: 1.7;
+  }
+  .feature-image {
+    flex-shrink: 0;
+    width: 160px;
+    height: 280px;
+    background: rgba(124,92,252,0.08);
+    border-radius: 16px;
+    border: 2px dashed rgba(124,92,252,0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: #9B8EC4;
+    font-size: 11px;
+    text-align: center;
+    overflow: hidden;
+  }
+  .feature-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 14px;
+    display: block;
+  }
+  .feature-image-icon { font-size: 28px; }
+
+  /* ───── RESULT ───── */
+  .result-bg { background: #F4F2FF; }
+  .result-card {
+    background: linear-gradient(135deg, #7C5CFC 0%, #5B8EFF 100%);
+    border-radius: 24px;
+    padding: 28px 22px;
+    margin-top: 28px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 12px 40px rgba(124,92,252,0.3);
+  }
+  .result-card::before {
+    content: '🎯';
+    position: absolute;
+    right: 20px; top: 20px;
+    font-size: 52px;
+    opacity: 0.2;
+  }
+  .result-card-title {
+    font-size: 20px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.4;
+    margin-bottom: 18px;
+    letter-spacing: -0.02em;
+  }
+  .result-card-title span { color: #C8BCFF; }
+  .result-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .result-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.9);
+    line-height: 1.6;
+  }
+  .result-list li::before {
+    content: '✓';
+    background: rgba(255,255,255,0.25);
+    color: #fff;
+    font-weight: 900;
+    font-size: 11px;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ───── VS ───── */
+  .vs-bg { background: linear-gradient(160deg, #EDE9FF, #E8F0FF); }
+  .vs-bg .section-label { color: #5B4AC8; background: rgba(91,74,200,0.1); }
+  .vs-bg .section-title { color: #1A1040; }
+  .vs-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 28px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(124,92,252,0.1);
+  }
+  .vs-table thead th {
+    padding: 14px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+  }
+  .vs-table thead th:first-child {
+    background: #DDD8F8;
+    color: #5B4AC8;
+    width: 42%;
+    text-align: left;
+    padding-left: 16px;
+  }
+  .vs-table thead th:nth-child(2) {
+    background: #CEC8F0;
+    color: #7B70B8;
+    width: 25%;
+  }
+  .vs-table thead th:last-child {
+    background: linear-gradient(90deg, #7C5CFC, #5B8EFF);
+    color: #fff;
+    width: 33%;
+  }
+  .vs-table tbody td {
+    padding: 12px 10px;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(124,92,252,0.06);
+  }
+  .vs-table tbody td:first-child {
+    background: #fff;
+    color: #3D2D80;
+    font-weight: 500;
+    padding-left: 16px;
+  }
+  .vs-table tbody td:nth-child(2) {
+    background: #FAF8FF;
+    text-align: center;
+    color: #bbb;
+    font-size: 17px;
+  }
+  .vs-table tbody td:last-child {
+    background: rgba(124,92,252,0.05);
+    text-align: center;
+    color: #7C5CFC;
+    font-size: 17px;
+    font-weight: 900;
+  }
+  .vs-table tbody tr:last-child td { border-bottom: none; }
+
+  /* ───── SOCIAL PROOF ───── */
+  .proof-bg { background: #F4F2FF; }
+  .cards {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 28px;
+  }
+  .proof-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 16px rgba(124,92,252,0.08);
+    border: 1px solid rgba(124,92,252,0.1);
+  }
+  .proof-card-quote {
+    font-size: 14px;
+    color: #3D2D80;
+    line-height: 1.75;
+    margin-bottom: 14px;
+  }
+  .proof-card-author { display: flex; align-items: center; gap: 10px; }
+  .proof-avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #7C5CFC, #5B8EFF);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .proof-name { font-size: 13px; font-weight: 700; color: #1A1040; }
+  .proof-role { font-size: 11px; color: #9B8EC4; margin-top: 2px; }
+  .stars { color: #7C5CFC; font-size: 13px; letter-spacing: 2px; margin-bottom: 10px; }
+
+  /* ───── STATS ───── */
+  .stats-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 28px;
+  }
+  .stat-card {
+    background: #fff;
+    border: 1.5px solid rgba(124,92,252,0.18);
+    border-radius: 18px;
+    padding: 20px 14px;
+    text-align: center;
+    box-shadow: 0 4px 14px rgba(124,92,252,0.07);
+  }
+  .stat-num {
+    font-size: 30px;
+    font-weight: 900;
+    background: linear-gradient(90deg, #7C5CFC, #5B8EFF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-label { font-size: 11px; color: #9B8EC4; line-height: 1.5; }
+
+  /* ───── CTA SECTION ───── */
+  .cta-section {
+    background: linear-gradient(160deg, #EDE9FF 0%, #E8F0FF 100%);
+    padding: 64px 24px 140px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    top: -30%; left: -20%;
+    width: 140%; height: 80%;
+    background: radial-gradient(ellipse, rgba(124,92,252,0.1) 0%, transparent 65%);
+  }
+  .cta-section .section-label { color: #5B4AC8; background: rgba(91,74,200,0.1); }
+  .cta-section .section-title { color: #1A1040; }
+  .cta-section .section-body { color: #6B5B95; max-width: 300px; margin: 0 auto 36px; }
+  .cta-btn {
+    background: linear-gradient(90deg, #7C5CFC 0%, #5B8EFF 100%);
+    color: #fff;
+    font-size: 17px;
+    font-weight: 900;
+    padding: 18px 0;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    max-width: 340px;
+    display: block;
+    margin: 0 auto;
+    box-shadow: 0 8px 28px rgba(124,92,252,0.35);
+    letter-spacing: -0.01em;
+  }
+  .cta-sub { font-size: 12px; color: rgba(91,74,200,0.5); margin-top: 12px; }
+
+  /* ───── FIXED BAR ───── */
+  .fixed-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 9999;
+    background: #fff;
+    border-top: 1px solid rgba(124,92,252,0.15);
+    padding: 12px 20px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    box-shadow: 0 -4px 20px rgba(124,92,252,0.08);
+    transition: transform 0.3s ease;
+  }
+  .fixed-bar-text { font-size: 13px; color: #6B5B95; line-height: 1.4; flex: 1; }
+  .fixed-bar-text strong { color: #1A1040; display: block; font-size: 14px; font-weight: 700; }
+  .fixed-bar-btn {
+    background: linear-gradient(90deg, #7C5CFC, #5B8EFF);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 900;
+    padding: 13px 22px;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    box-shadow: 0 4px 16px rgba(124,92,252,0.3);
+  }
+
+  /* ───── MODAL ───── */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(26,16,64,0.5);
+    z-index: 99998;
+    display: none;
+    align-items: flex-end;
+    backdrop-filter: blur(3px);
+  }
+  .modal-overlay.active { display: flex; }
+  .modal-sheet {
+    background: #fff;
+    border-radius: 28px 28px 0 0;
+    padding: 28px 24px 48px;
+    width: 100%;
+    max-height: 85svh;
+    overflow-y: auto;
+    animation: slideUp 0.35s cubic-bezier(0.16,1,0.3,1);
+  }
+  @keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+  .modal-handle {
+    width: 40px; height: 4px;
+    background: #E0D8F8;
+    border-radius: 100px;
+    margin: 0 auto 22px;
+  }
+  .modal-title {
+    font-size: 22px;
+    font-weight: 900;
+    color: #1A1040;
+    margin-bottom: 6px;
+    letter-spacing: -0.02em;
+  }
+  .modal-sub { font-size: 14px; color: #9B8EC4; margin-bottom: 28px; line-height: 1.6; }
+  .form-group { margin-bottom: 14px; }
+  .form-label { font-size: 13px; font-weight: 700; color: #3D2D80; margin-bottom: 7px; display: block; }
+  .form-input {
+    width: 100%;
+    border: 1.5px solid #DDD8F8;
+    border-radius: 14px;
+    padding: 14px 16px;
+    font-size: 15px;
+    font-family: inherit;
+    color: #1A1040;
+    background: #FAF8FF;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-input:focus { border-color: #7C5CFC; background: #fff; }
+  .form-input::placeholder { color: #C4BAE8; }
+  .form-textarea { resize: none; height: 96px; line-height: 1.6; }
+  .agree-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 18px 0 22px;
+    font-size: 13px;
+    color: #9B8EC4;
+    line-height: 1.5;
+  }
+  .agree-row input[type="checkbox"] {
+    width: 18px; height: 18px;
+    flex-shrink: 0; margin-top: 1px;
+    accent-color: #7C5CFC;
+  }
+  .submit-btn {
+    width: 100%;
+    background: linear-gradient(90deg, #7C5CFC, #5B8EFF);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 900;
+    padding: 17px;
+    border-radius: 16px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(124,92,252,0.3);
+    transition: opacity 0.2s, transform 0.1s;
+    letter-spacing: -0.01em;
+  }
+  .submit-btn:active { transform: scale(0.98); }
+  .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  /* ───── SUCCESS ───── */
+  .success-state { display: none; text-align: center; padding: 24px 0; }
+  .success-icon {
+    width: 72px; height: 72px;
+    background: linear-gradient(135deg, #7C5CFC, #5B8EFF);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px;
+    margin: 0 auto 20px;
+    box-shadow: 0 8px 28px rgba(124,92,252,0.3);
+  }
+  .success-title { font-size: 22px; font-weight: 900; color: #1A1040; margin-bottom: 10px; }
+  .success-body { font-size: 14px; color: #9B8EC4; line-height: 1.75; }
+
+  /* ───── FOOTER ───── */
+  footer { background: #1A1040; padding: 40px 24px 100px; }
+  .footer-logo { font-size: 20px; font-weight: 900; color: #fff; letter-spacing: -0.03em; margin-bottom: 14px; }
+  .footer-logo span { color: #9B7EFF; }
+  .footer-info { font-size: 12px; color: rgba(255,255,255,0.35); line-height: 1.9; }
+  .footer-links { display: flex; gap: 16px; margin-top: 18px; flex-wrap: wrap; }
+  .footer-links a { font-size: 12px; color: rgba(255,255,255,0.4); text-decoration: none; }
+
+  /* ───── PROOF MOOD OVERRIDES ───── */
+  :root {
+    --deep-ink: #17122F;
+    --proof-purple: #6D5BFF;
+    --signal-blue: #3D8BFF;
+    --soft-lavender: #F2F0FF;
+    --soft-blue: #EEF7FF;
+    --node-mint: #35C6A6;
+    --warning-coral: #FF6B6B;
+    --muted-gray: #756F8F;
+    --card-line: rgba(109,91,255,0.12);
+    --purple-glow: rgba(109,91,255,0.22);
+  }
+  body {
+    background: var(--soft-lavender);
+    color: var(--deep-ink);
+  }
+  .hero,
+  .how-bg,
+  .vs-bg,
+  .cta-section {
+    background:
+      radial-gradient(circle at 18% 8%, rgba(53,198,166,0.16) 0%, transparent 28%),
+      radial-gradient(circle at 88% 20%, rgba(61,139,255,0.16) 0%, transparent 30%),
+      linear-gradient(160deg, var(--soft-lavender) 0%, #F8F7FF 46%, var(--soft-blue) 100%);
+  }
+  .hero::before,
+  .cta-section::before {
+    background: radial-gradient(circle, rgba(109,91,255,0.16) 0%, transparent 70%);
+  }
+  .hero-badge,
+  .section-label,
+  .feature-tag,
+  .step-tag,
+  .how-bg .section-label,
+  .vs-bg .section-label,
+  .cta-section .section-label {
+    background: rgba(109,91,255,0.10);
+    color: var(--proof-purple);
+  }
+  .hero-headline,
+  .hero-sub,
+  .section-title,
+  .how-bg .section-title,
+  .vs-bg .section-title,
+  .cta-section .section-title,
+  .feature-title,
+  .step-title,
+  .fixed-bar-text strong,
+  .modal-title,
+  .success-title {
+    color: var(--deep-ink);
+  }
+  .hero-headline em,
+  .stars,
+  .vs-table tbody td:last-child {
+    color: var(--proof-purple);
+  }
+  .hero-sub-small,
+  .section-body,
+  .comparison-body,
+  .feature-desc,
+  .step-desc,
+  .proof-role,
+  .stat-label,
+  .fixed-bar-text,
+  .success-body,
+  .modal-sub {
+    color: var(--muted-gray);
+  }
+  .hero-scroll-hint {
+    color: rgba(109,91,255,0.46);
+  }
+  .scroll-dot {
+    background: linear-gradient(to bottom, rgba(109,91,255,0.46), transparent);
+  }
+  .hero-image-placeholder {
+    background:
+      radial-gradient(circle at 50% 28%, rgba(53,198,166,0.16), transparent 34%),
+      linear-gradient(135deg, #F8F7FF, #EAF6FF);
+    color: var(--muted-gray);
+    box-shadow: 0 20px 60px rgba(23,18,47,0.08);
+  }
+  .hero-cta,
+  .cta-btn,
+  .fixed-bar-btn,
+  .submit-btn {
+    background: linear-gradient(90deg, var(--proof-purple) 0%, var(--signal-blue) 100%);
+    box-shadow: 0 8px 28px var(--purple-glow);
+  }
+  .ticker-wrap {
+    background: linear-gradient(90deg, var(--deep-ink), var(--proof-purple) 52%, var(--signal-blue));
+  }
+  .problem-bg,
+  .feature-bg,
+  .result-bg,
+  .proof-bg {
+    background: var(--soft-lavender);
+  }
+  .problem-quote {
+    border-left-color: var(--warning-coral);
+    color: var(--deep-ink);
+    box-shadow: 0 8px 24px rgba(255,107,107,0.10);
+  }
+  .problem-list li,
+  .step,
+  .proof-card,
+  .stat-card,
+  .fixed-bar,
+  .modal-sheet {
+    border-color: var(--card-line);
+    box-shadow: 0 8px 24px rgba(23,18,47,0.06);
+  }
+  .problem-list li {
+    color: var(--deep-ink);
+  }
+  .problem-list li::before {
+    content: '!';
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(255,107,107,0.14);
+    color: var(--warning-coral);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 900;
+    margin-top: 1px;
+  }
+  .feature-image {
+    background: rgba(53,198,166,0.08);
+    border-color: rgba(53,198,166,0.28);
+    color: var(--node-mint);
+  }
+  .feature-row {
+    border-bottom-color: rgba(109,91,255,0.09);
+  }
+  .result-card {
+    background:
+      radial-gradient(circle at 84% 18%, rgba(53,198,166,0.28) 0%, transparent 30%),
+      linear-gradient(135deg, var(--deep-ink) 0%, var(--proof-purple) 58%, var(--signal-blue) 100%);
+    box-shadow: 0 18px 44px rgba(23,18,47,0.22);
+  }
+  .result-card::before {
+    content: 'NODE';
+    color: #fff;
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    opacity: 0.18;
+  }
+  .result-card-title span {
+    color: #B7F5E8;
+  }
+  .vs-table {
+    box-shadow: 0 8px 28px rgba(23,18,47,0.08);
+  }
+  .vs-table thead th:first-child {
+    background: #E7E4FF;
+    color: var(--deep-ink);
+  }
+  .vs-table thead th:nth-child(2) {
+    background: #F6F4FF;
+    color: var(--muted-gray);
+  }
+  .vs-table thead th:last-child {
+    background: linear-gradient(90deg, var(--proof-purple), var(--signal-blue));
+  }
+  .vs-table tbody td:first-child,
+  .proof-card-quote,
+  .proof-name,
+  .form-label {
+    color: var(--deep-ink);
+  }
+  .vs-table tbody td:last-child {
+    background: rgba(53,198,166,0.09);
+    color: var(--node-mint);
+  }
+  .vs-table tbody td {
+    border-bottom-color: rgba(109,91,255,0.07);
+  }
+  .proof-avatar,
+  .success-icon,
+  .step-num {
+    background: linear-gradient(135deg, var(--proof-purple), var(--signal-blue));
+  }
+  .stat-card {
+    border-color: rgba(53,198,166,0.24);
+  }
+  .stat-num {
+    background: linear-gradient(90deg, var(--proof-purple), var(--node-mint));
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+  .form-input {
+    border-color: #DAD6FF;
+    background: #FBFAFF;
+    color: var(--deep-ink);
+  }
+  .form-input:focus {
+    border-color: var(--proof-purple);
+  }
+  .form-input::placeholder {
+    color: #A9A2C8;
+  }
+  .agree-row,
+  .cta-sub {
+    color: rgba(117,111,143,0.72);
+  }
+  .agree-row input[type="checkbox"] {
+    accent-color: var(--proof-purple);
+  }
+  .fixed-bar {
+    border-top-color: rgba(109,91,255,0.14);
+  }
+  footer {
+    background: var(--deep-ink);
+  }
+  .footer-logo span {
+    color: var(--node-mint);
+  }
+
+  /* ───── DARK AI MAP MOOD ───── */
+  :root {
+    --deep-ink: #050816;
+    --proof-purple: #8B5CF6;
+    --signal-blue: #5B7CFF;
+    --soft-lavender: #070A18;
+    --soft-blue: #0E1630;
+    --node-mint: #4ADE80;
+    --warning-coral: #FF7A68;
+    --muted-gray: #B8B7C8;
+    --card-line: rgba(154,122,255,0.24);
+    --purple-glow: rgba(139,92,246,0.42);
+    --panel-dark: rgba(15,18,38,0.78);
+    --panel-soft: rgba(255,255,255,0.08);
+  }
+  html {
+    background: #02040D;
+  }
+  body {
+    background:
+      radial-gradient(circle at 50% -10%, rgba(139,92,246,0.32) 0%, transparent 38%),
+      linear-gradient(180deg, #030611 0%, #070A18 42%, #050816 100%);
+    color: #F7F4FF;
+  }
+  .hero {
+    background: #02040D;
+    padding: 0;
+  }
+  .hero::before {
+    display: none;
+  }
+  .hero-copy {
+    display: none;
+  }
+  .hero-image-wrap {
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
+  }
+  .hero-image-wrap img {
+    width: 100%;
+    display: block;
+  }
+  .hero-image-wrap .hero-cta {
+    bottom: 0;
+    left: 7%;
+    right: 7%;
+    width: 86%;
+    padding: 8% 0 13%;
+  }
+  .hero-image-placeholder {
+    width: 100%;
+    margin: 0;
+    background:
+      radial-gradient(circle at 50% 35%, rgba(139,92,246,0.28), transparent 36%),
+      linear-gradient(180deg, #050816, #111735);
+    color: rgba(255,255,255,0.72);
+  }
+  .ticker-wrap {
+    background: linear-gradient(90deg, #080B1A 0%, #7C3AED 48%, #4F46E5 100%);
+    box-shadow: 0 0 28px rgba(139,92,246,0.32);
+  }
+  .ticker-item {
+    color: #FFFFFF;
+  }
+  .section,
+  .feature-bg {
+    position: relative;
+  }
+  .problem-bg,
+  .feature-bg,
+  .result-bg,
+  .proof-bg,
+  .vs-bg,
+  .cta-section {
+    background:
+      radial-gradient(circle at 10% 0%, rgba(139,92,246,0.18) 0%, transparent 32%),
+      radial-gradient(circle at 96% 38%, rgba(91,124,255,0.12) 0%, transparent 30%),
+      linear-gradient(180deg, #070A18 0%, #090D1F 100%);
+  }
+  .section-label,
+  .how-bg .section-label,
+  .vs-bg .section-label,
+  .cta-section .section-label {
+    background: rgba(139,92,246,0.14);
+    border: 1px solid rgba(176,139,255,0.42);
+    color: #D7C6FF;
+    box-shadow: inset 0 0 18px rgba(139,92,246,0.10);
+  }
+  .section-title,
+  .feature-title,
+  .result-card-title,
+  .cta-section .section-title,
+  .vs-bg .section-title,
+  .proof-name,
+  .modal-title,
+  .success-title,
+  .fixed-bar-text strong,
+  .form-label {
+    color: #FFFFFF;
+  }
+  .section-body,
+  .comparison-body,
+  .feature-desc,
+  .proof-role,
+  .stat-label,
+  .fixed-bar-text,
+  .success-body,
+  .modal-sub,
+  .agree-row,
+  .cta-sub {
+    color: var(--muted-gray);
+  }
+  .problem-quote,
+  .problem-list li,
+  .proof-card,
+  .stat-card,
+  .modal-sheet,
+  .fixed-bar {
+    background: rgba(255,255,255,0.075);
+    border: 1px solid var(--card-line);
+    box-shadow:
+      0 18px 40px rgba(0,0,0,0.28),
+      inset 0 1px 0 rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+  }
+  .problem-quote {
+    border-left-color: var(--proof-purple);
+    color: #F7F4FF;
+  }
+  .problem-list li,
+  .proof-card-quote {
+    color: #ECE9FF;
+  }
+  .problem-list li::before {
+    background: rgba(255,122,104,0.16);
+    color: var(--warning-coral);
+    box-shadow: 0 0 14px rgba(255,122,104,0.24);
+  }
+  .feature-row {
+    border-bottom-color: rgba(154,122,255,0.16);
+  }
+  .feature-image {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(154,122,255,0.28);
+    box-shadow: 0 18px 34px rgba(0,0,0,0.28);
+  }
+  .feature-image img {
+    filter: saturate(0.96) contrast(1.03);
+  }
+  .result-card {
+    background:
+      radial-gradient(circle at 72% 12%, rgba(255,255,255,0.16) 0%, transparent 28%),
+      radial-gradient(circle at 18% 80%, rgba(139,92,246,0.42) 0%, transparent 36%),
+      linear-gradient(135deg, #141832 0%, #5B35E8 58%, #3B36D9 100%);
+    border: 1px solid rgba(201,182,255,0.26);
+    box-shadow:
+      0 22px 54px rgba(0,0,0,0.36),
+      0 0 36px rgba(139,92,246,0.28);
+  }
+  .result-card-title span {
+    color: #C9B6FF;
+  }
+  .vs-table {
+    box-shadow: 0 22px 46px rgba(0,0,0,0.28);
+  }
+  .vs-table thead th:first-child {
+    background: #161A34;
+    color: #F7F4FF;
+  }
+  .vs-table thead th:nth-child(2) {
+    background: #101426;
+    color: #A9A8BB;
+  }
+  .vs-table thead th:last-child {
+    background: linear-gradient(90deg, #7C3AED, #4F46E5);
+  }
+  .vs-table tbody td:first-child,
+  .vs-table tbody td:nth-child(2),
+  .vs-table tbody td:last-child {
+    border-bottom-color: rgba(154,122,255,0.14);
+  }
+  .vs-table tbody td:first-child {
+    background: rgba(255,255,255,0.07);
+    color: #ECE9FF;
+  }
+  .vs-table tbody td:nth-child(2) {
+    background: rgba(255,255,255,0.045);
+    color: rgba(255,255,255,0.32);
+  }
+  .vs-table tbody td:last-child {
+    background: rgba(139,92,246,0.12);
+    color: #A78BFA;
+  }
+  .comparison-body {
+    font-size: 14px;
+    line-height: 1.8;
+    margin-top: 24px;
+  }
+  .proof-avatar,
+  .success-icon,
+  .step-num {
+    background: linear-gradient(135deg, #9A6CFF, #4F46E5);
+    box-shadow: 0 0 18px rgba(139,92,246,0.34);
+  }
+  .stars {
+    color: #A78BFA;
+  }
+  .stat-card {
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(154,122,255,0.24);
+  }
+  .stat-num {
+    background: linear-gradient(90deg, #A78BFA, #7C5CFF);
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+  .cta-section::before {
+    background: radial-gradient(ellipse, rgba(139,92,246,0.22) 0%, transparent 66%);
+  }
+  .hero-cta,
+  .cta-btn,
+  .fixed-bar-btn,
+  .submit-btn {
+    background: linear-gradient(90deg, #8B5CF6 0%, #4F46E5 100%);
+    box-shadow:
+      0 10px 28px rgba(79,70,229,0.38),
+      0 0 18px rgba(139,92,246,0.24);
+  }
+  .fixed-bar {
+    background: rgba(7,10,24,0.88);
+    border-top-color: rgba(154,122,255,0.26);
+  }
+  .modal-overlay {
+    background: rgba(2,4,13,0.72);
+  }
+  .modal-sheet {
+    background:
+      radial-gradient(circle at 50% 0%, rgba(139,92,246,0.16), transparent 34%),
+      #0B0F22;
+  }
+  .modal-handle {
+    background: rgba(167,139,250,0.38);
+  }
+  .form-input {
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(154,122,255,0.28);
+    color: #FFFFFF;
+  }
+  .form-input:focus {
+    background: rgba(255,255,255,0.10);
+    border-color: #A78BFA;
+  }
+  .form-input::placeholder {
+    color: rgba(255,255,255,0.42);
+  }
+  .agree-row input[type="checkbox"] {
+    accent-color: #8B5CF6;
+  }
+  footer {
+    background: #02040D;
+    border-top: 1px solid rgba(154,122,255,0.18);
+  }
+  .footer-logo span {
+    color: #A78BFA;
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-copy">
+    <div class="hero-badge">AI 자기이해 시스템</div>
+    <h1 class="hero-headline">나는 왜 매번<br><em>같은 방식으로</em><br>무너질까?</h1>
+    <p class="hero-sub">Proof는 GPT 대화, 회고, 메모, 실패 기록을 학습해<br>나의 패턴을 자기이해 Map으로 저장하고 행동강령으로 업데이트하는 AI 자기이해 시스템입니다.</p>
+    <p class="hero-sub-small">한 번 분석하고 끝나는 리포트가 아닙니다.<br>기록할수록 더 정확해지는 나만의 행동 OS입니다.</p>
+  </div>
+  <!-- hero.png 파일을 같은 폴더에 저장하면 자동으로 표시됩니다 -->
+  <div class="hero-image-wrap" id="heroImageWrap" style="display:none">
+    <img src="image/hero.png" alt="Proof 자기이해 Map 화면" id="heroImage">
+    <button class="hero-cta" onclick="openModal()">내 자기이해 Map 만들기</button>
+  </div>
+  <div class="hero-image-placeholder" id="heroPlaceholder">
+    <span>📱</span>
+    hero.png를 같은 폴더에 저장하면<br>여기에 이미지가 표시돼요
+  </div>
+
+</section>
+
+<!-- ═══ TICKER ═══ -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="ticker-item">기록 소스 통합</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">회피 루프 분석</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">자기이해 Map 업데이트</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">행동강령 제안</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">변화 증거 추적</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">기록 소스 통합</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">회피 루프 분석</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">자기이해 Map 업데이트</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">행동강령 제안</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">변화 증거 추적</span><span class="ticker-dot">·</span>
+  </div>
+</div>
+
+<!-- ═══ PROBLEM ═══ -->
+<section class="section problem-bg">
+  <div class="section-label">The Problem</div>
+  <h2 class="section-title">나도 내가 왜 이러는지<br>모르겠다면.</h2>
+  <div class="problem-quote">
+    "계획은 세웠는데 또 미뤘고, 밤에는 왜 또 이랬는지 자책만 했어요."
+  </div>
+  <p class="section-body">문제는 생각이 부족한 것이 아닙니다. 이미 충분히 고민하고, 기록하고, GPT와 대화하고 있습니다. 진짜 문제는 그 기록들이 흩어진 채 사라지고, <strong>내가 반복해서 무너지는 방식으로 구조화되지 않는다는 것</strong>입니다.</p>
+  <ul class="problem-list">
+    <li>GPT에게는 털어놨지만, 그 통찰은 대화창 속에 흩어진다</li>
+    <li>회고는 했지만, 다음 날 행동은 다시 같은 루프로 돌아간다</li>
+    <li>확신이 없으면 계획을 다시 짜고, 실행은 계속 밀린다</li>
+    <li>실패할 때마다 처음 겪는 문제처럼 자책하고 다시 다짐한다</li>
+  </ul>
+</section>
+
+
+<!-- ═══ FEATURE ═══ -->
+<section class="feature-bg">
+  <div style="padding: 48px 24px 8px; text-align: center;">
+    <h2 style="font-size: clamp(20px, 5.5vw, 28px); font-weight: 900; color: #fff; line-height: 1.35; letter-spacing: -0.03em;">Proof는 흩어진 기록을<br>나만의 자기이해 Map으로 업데이트합니다.</h2>
+  </div>
+
+  <!-- 1: 텍스트 왼쪽 / 이미지 오른쪽 -->
+  <div class="feature-row">
+    <div class="feature-text">
+      <div class="feature-title">GPT 대화, 회고,<br>메모를 한곳에<br>모읍니다.</div>
+      <div class="feature-desc">머릿속에만 있던 생각, 하루 회고, GPT와 나눈 대화, 목표 실패 기록을 Proof에 쌓아갑니다. 흩어진 기록이 사라지지 않고 나를 이해하는 데이터가 됩니다.</div>
+    </div>
+    <div class="feature-image">
+      <img src="image/1번 mock.png" alt="기록 소스 통합">
+    </div>
+  </div>
+
+  <!-- 2: 이미지 왼쪽 / 텍스트 오른쪽 -->
+  <div class="feature-row reverse">
+    <div class="feature-text">
+      <div class="feature-title">AI가 반복되는<br>회피 루프를<br>찾아냅니다.</div>
+      <div class="feature-desc">불확실성, 완벽주의, 시작 지연, 자책처럼 반복해서 등장하는 트리거와 행동 패턴을 분석합니다. 내가 왜 같은 방식으로 무너지는지 구조로 보여줍니다.</div>
+    </div>
+    <div class="feature-image">
+      <img src="image/2번 mock.png" alt="반복 패턴 분석">
+    </div>
+  </div>
+
+  <!-- 3: 텍스트 왼쪽 / 이미지 오른쪽 -->
+  <div class="feature-row">
+    <div class="feature-text">
+      <div class="feature-title">나의 패턴이<br>자기이해 Map으로<br>저장됩니다.</div>
+      <div class="feature-desc">한 번의 리포트로 끝나지 않습니다. 기록이 쌓일수록 나의 회피 루프, 몰입 조건, 위험 신호, 강점이 계속 업데이트됩니다.</div>
+    </div>
+    <div class="feature-image">
+      <img src="image/mock 3.png" alt="자기이해 Map 업데이트">
+    </div>
+  </div>
+
+  <!-- 4: 이미지 왼쪽 / 텍스트 오른쪽 -->
+  <div class="feature-row reverse">
+    <div class="feature-text">
+      <div class="feature-title">매일의<br>행동강령으로<br>바뀝니다.</div>
+      <div class="feature-desc">Proof는 단순히 분석만 하지 않습니다. 오늘 발견한 패턴을 바탕으로 내일 바로 실행할 수 있는 한 줄 행동 규칙을 제안합니다.</div>
+    </div>
+    <div class="feature-image">
+      <img src="image/mock 4.png" alt="행동강령 업데이트">
+    </div>
+  </div>
+</section>
+
+<!-- ═══ RESULT ═══ -->
+<section class="section result-bg">
+  <div class="section-label">The Result</div>
+  <h2 class="section-title">성찰이<br>행동강령으로 바뀝니다</h2>
+  <div class="result-card">
+    <div class="result-card-title">기록할수록 나를 더 잘 이해하고,<br><span>피드백할수록 행동강령이 더 정확해집니다</span></div>
+    <ul class="result-list">
+      <li>내가 어떤 상황에서 반복해서 무너지는지 보입니다</li>
+      <li>흩어졌던 GPT 대화와 회고가 하나의 패턴으로 연결됩니다</li>
+      <li>내 회피 루프에 이름이 붙고, 다시 반복되기 전에 알아차릴 수 있습니다</li>
+      <li>작은 실행과 변화가 사라지지 않고 Proof로 남습니다</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══ VS ═══ -->
+<section class="section vs-bg">
+  <div class="section-label">Why Proof</div>
+  <h2 class="section-title">GPT나 일기앱과<br>뭐가 다른가요?</h2>
+  <table class="vs-table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>GPT / 일기앱</th>
+        <th>Proof</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>순간적인 성찰</td><td>✓</td><td>✓</td></tr>
+      <tr><td>흩어진 기록 통합</td><td>△</td><td>✓</td></tr>
+      <tr><td>반복 패턴 자동 연결</td><td>✕</td><td>✓</td></tr>
+      <tr><td>회피 트리거 구조화</td><td>✕</td><td>✓</td></tr>
+      <tr><td>매일의 행동강령 업데이트</td><td>✕</td><td>✓</td></tr>
+      <tr><td>변화의 증거 추적</td><td>✕</td><td>✓</td></tr>
+      <tr><td>나만의 자기이해 Map 유지</td><td>✕</td><td>✓</td></tr>
+    </tbody>
+  </table>
+  <p class="comparison-body">GPT와 일기앱은 그 순간의 생각을 정리하는 데 도움이 됩니다.<br>하지만 Proof는 거기서 멈추지 않습니다.<br><br>Proof는 흩어진 기록을 계속 연결해 내가 반복해서 무너지는 방식을 찾고, 그 패턴을 매일의 행동강령으로 업데이트합니다.</p>
+</section>
+
+<!-- ═══ SOCIAL PROOF ═══ -->
+<section class="section proof-bg">
+  <div class="section-label">Early Feedback</div>
+  <h2 class="section-title">먼저 경험한 사람들의<br>반응이에요</h2>
+  <div class="cards">
+    <div class="proof-card">
+      <div class="stars">★★★★★</div>
+      <div class="proof-card-quote">"그냥 게으른 줄 알았는데, 확신이 없을 때마다 계획을 다시 짜고 시작을 미루는 패턴이 보였어요. 이름이 붙으니까 처음으로 바꿀 수 있을 것 같았어요."</div>
+      <div class="proof-card-author">
+        <div class="proof-avatar">김</div>
+        <div>
+          <div class="proof-name">김지훈</div>
+          <div class="proof-role">취업 준비 중 · 24세</div>
+        </div>
+      </div>
+    </div>
+    <div class="proof-card">
+      <div class="stars">★★★★★</div>
+      <div class="proof-card-quote">"GPT랑 대화하면 그 순간은 정리되는데 금방 잊혔어요. Proof는 비슷한 고민을 계속 묶어줘서 제가 반복하는 루프를 보게 해줬어요."</div>
+      <div class="proof-card-author">
+        <div class="proof-avatar">이</div>
+        <div>
+          <div class="proof-name">이수연</div>
+          <div class="proof-role">사이드 프로젝트 준비 · 22세</div>
+        </div>
+      </div>
+    </div>
+    <div class="proof-card">
+      <div class="stars">★★★★★</div>
+      <div class="proof-card-quote">"한 번 분석받고 끝나는 느낌이 아니라, 기록할수록 저를 더 잘 이해하는 시스템 같았어요. 매일 행동강령이 업데이트되는 점이 좋았습니다."</div>
+      <div class="proof-card-author">
+        <div class="proof-avatar">박</div>
+        <div>
+          <div class="proof-name">박서준</div>
+          <div class="proof-role">자기계발 콘텐츠 구독자 · 25세</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-num">3분</div>
+      <div class="stat-label">하루 기록에 필요한 시간</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">7일</div>
+      <div class="stat-label">내 반복 패턴을 확인해보는 첫 테스트 기간</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FINAL CTA ═══ -->
+<section class="cta-section">
+  <div class="section-label">Limited Beta</div>
+  <h2 class="section-title">나를 바꾸고 싶다면,<br>먼저 내가 어떻게 무너지는지 봐야 합니다.</h2>
+  <p class="section-body">더 이상 매번 같은 실패를 처음 겪는 것처럼 넘기지 마세요. Proof는 당신의 기록을 바탕으로 반복 패턴을 찾고, 매일의 행동강령으로 업데이트합니다.</p>
+  <button class="cta-btn" onclick="openModal()">내 자기이해 Map 만들기</button>
+  <p class="cta-sub">선착순 체험단 모집 · 비용 없음 · 7일 기록 테스트</p>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-logo">Pro<span>of</span></div>
+  <div class="footer-info">
+    흩어진 기록을 나만의 자기이해 Map으로<br>
+    contact@proofmap.kr<br>
+    © 2026 Proof. All rights reserved.
+  </div>
+  <div class="footer-links">
+    <a href="#">개인정보처리방침</a>
+    <a href="#">이용약관</a>
+  </div>
+</footer>
+
+<!-- ═══ FIXED BAR ═══ -->
+<div class="fixed-bar" id="fixedBar">
+  <div class="fixed-bar-text">
+    <strong>무료 체험단 모집 중</strong>
+    7일간 내 반복 패턴과 행동강령을 받아보세요
+  </div>
+  <button class="fixed-bar-btn" onclick="openModal()">참여하기</button>
+</div>
+
+<!-- ═══ MODAL ═══ -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div id="formState">
+      <div class="modal-title">무료 체험단 신청</div>
+      <div class="modal-sub"></div>
+      <div class="form-group">
+        <label class="form-label">이름</label>
+        <input class="form-input" id="inputName" type="text" placeholder="홍길동" maxlength="10">
+      </div>
+      <div class="form-group">
+        <label class="form-label">연락처</label>
+        <input class="form-input" id="inputPhone" type="tel" placeholder="010-0000-0000" maxlength="13">
+      </div>
+      <div class="form-group">
+        <label class="form-label">요즘 반복해서 무너지는 상황이 있나요? <span style="color:var(--proof-purple)">선택 입력</span></label>
+        <textarea class="form-input form-textarea" id="inputSituation" placeholder="예) 계획은 세우는데 확신이 없으면 시작을 미루고, 밤에는 자책하면서 다시 자기계발 영상을 봐요."></textarea>
+      </div>
+      <div class="agree-row">
+        <input type="checkbox" id="agreeCheck" checked>
+        <label for="agreeCheck">개인정보 수집 및 이용에 동의합니다. 수집된 정보는 체험단 운영 목적으로만 사용됩니다.</label>
+      </div>
+      <button class="submit-btn" id="submitBtn" onclick="submitForm()">내 자기이해 Map 만들기</button>
+    </div>
+    <div class="success-state" id="successState">
+      <div class="success-icon">✓</div>
+      <div class="success-title">신청 완료!</div>
+      <div class="success-body">
+        24시간 내에 연락드릴게요.<br>
+        입력해주신 내용을 바탕으로<br>첫 반복 패턴과 행동강령을 정리해드릴게요.
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby6K2b-ghkMxfh0hIef9H7veMswLqnIFHzT-9WIZfRKZ8G211R0m2N9gR6IzmRUscLm/exec';
+
+  // 히어로 이미지 로드 시도
+  const heroImg = document.getElementById('heroImage');
+  function showHeroImage() {
+    document.getElementById('heroImageWrap').style.display = 'block';
+    document.getElementById('heroPlaceholder').style.display = 'none';
+  }
+  function showHeroPlaceholder() {
+    document.getElementById('heroImageWrap').style.display = 'none';
+    document.getElementById('heroPlaceholder').style.display = 'flex';
+  }
+  heroImg.onload = showHeroImage;
+  heroImg.onerror = showHeroPlaceholder;
+  // 이미 캐시되어 로드된 경우 처리
+  if (heroImg.complete && heroImg.naturalWidth > 0) showHeroImage();
+  else if (heroImg.complete) showHeroPlaceholder();
+
+  document.getElementById('inputPhone').addEventListener('input', function(e) {
+    let v = e.target.value.replace(/\D/g, '');
+    if (v.length <= 3) e.target.value = v;
+    else if (v.length <= 7) e.target.value = v.slice(0,3) + '-' + v.slice(3);
+    else e.target.value = v.slice(0,3) + '-' + v.slice(3,7) + '-' + v.slice(7,11);
+  });
+
+  function openModal() {
+    document.getElementById('modalOverlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModalOutside(e) {
+    if (e.target === document.getElementById('modalOverlay')) {
+      document.getElementById('modalOverlay').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  }
+
+  async function submitForm() {
+    const name = document.getElementById('inputName').value.trim();
+    const phone = document.getElementById('inputPhone').value.trim();
+    const situation = document.getElementById('inputSituation').value.trim();
+    const agreed = document.getElementById('agreeCheck').checked;
+
+    if (!name) { alert('이름을 입력해주세요.'); document.getElementById('inputName').focus(); return; }
+    if (phone.replace(/\D/g,'').length < 10) { alert('올바른 연락처를 입력해주세요.'); document.getElementById('inputPhone').focus(); return; }
+    if (!agreed) { alert('개인정보 수집 및 이용에 동의해주세요.'); return; }
+
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = '신청 중…';
+
+    try {
+      const formData = new FormData();
+      formData.append('name', name);
+      formData.append('phone', phone);
+      formData.append('situation', situation);
+      formData.append('timestamp', new Date().toISOString());
+      await fetch(APPS_SCRIPT_URL, { method: 'POST', body: formData, mode: 'no-cors' });
+      showSuccess();
+    } catch (err) {
+      alert('일시적인 오류가 발생했어요. 잠시 후 다시 시도해주세요.');
+      btn.disabled = false;
+      btn.textContent = '내 자기이해 Map 만들기';
+    }
+  }
+
+  function showSuccess() {
+    document.getElementById('formState').style.display = 'none';
+    document.getElementById('successState').style.display = 'block';
+    document.getElementById('fixedBar').style.transform = 'translateY(120%)';
+  }
+</script>
+
+</body>
+</html>
