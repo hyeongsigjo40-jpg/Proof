@@ -1156,6 +1156,18 @@
     line-height: 1.8;
     margin-top: 24px;
   }
+  .text-gradient {
+    background: linear-gradient(90deg, #B794FF 0%, #7C5CFF 46%, #6EA2FF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: #A78BFA;
+    text-shadow: 0 0 28px rgba(139,92,246,0.22);
+  }
+  .text-coral {
+    color: #FF9A88;
+    text-shadow: 0 0 22px rgba(255,122,104,0.18);
+  }
   .proof-avatar,
   .success-icon,
   .step-num {
@@ -1290,16 +1302,16 @@
 <!-- ═══ PROBLEM ═══ -->
 <section class="section problem-bg">
   <div class="section-label">The Problem</div>
-  <h2 class="section-title">나도 내가 왜 이러는지<br>모르겠다면.</h2>
+  <h2 class="section-title">나도 내가 <span class="text-coral">왜 이러는지</span><br>모르겠다면.</h2>
   <div class="problem-quote">
     "계획은 세웠는데 또 미뤘고, 밤에는 왜 또 이랬는지 자책만 했어요."
   </div>
-  <p class="section-body">문제는 생각이 부족한 것이 아닙니다. 이미 충분히 고민하고, 기록하고, GPT와 대화하고 있습니다. 진짜 문제는 그 기록들이 흩어진 채 사라지고, <strong>내가 반복해서 무너지는 방식으로 구조화되지 않는다는 것</strong>입니다.</p>
+  <p class="section-body">문제는 생각이 부족한 것이 아닙니다. 이미 충분히 고민하고, 기록하고, GPT와 대화하고 있습니다. 진짜 문제는 그 기록들이 흩어진 채 사라지고, <strong>내가 왜 반복해서 무너지는지 보여주는 구조로 남지 않는다는 점</strong>입니다.</p>
   <ul class="problem-list">
-    <li>GPT에게는 털어놨지만, 그 통찰은 대화창 속에 흩어진다</li>
-    <li>회고는 했지만, 다음 날 행동은 다시 같은 루프로 돌아간다</li>
-    <li>확신이 없으면 계획을 다시 짜고, 실행은 계속 밀린다</li>
-    <li>실패할 때마다 처음 겪는 문제처럼 자책하고 다시 다짐한다</li>
+    <li>GPT에게는 털어놨지만, 그 통찰은 대화창 속에 흩어져요</li>
+    <li>회고는 했지만, 다음 날 행동은 다시 같은 루프로 돌아가요</li>
+    <li>확신이 없으면 계획을 다시 짜고, 실행은 계속 밀려요</li>
+    <li>실패할 때마다 처음 겪는 문제처럼 자책하고 다시 다짐해요</li>
   </ul>
 </section>
 
@@ -1307,7 +1319,7 @@
 <!-- ═══ FEATURE ═══ -->
 <section class="feature-bg">
   <div style="padding: 48px 24px 8px; text-align: center;">
-    <h2 style="font-size: clamp(20px, 5.5vw, 28px); font-weight: 900; color: #fff; line-height: 1.35; letter-spacing: -0.03em;">Proof는 흩어진 기록을<br>나만의 자기이해 Map으로 업데이트합니다.</h2>
+    <h2 style="font-size: clamp(20px, 5.5vw, 28px); font-weight: 900; color: #fff; line-height: 1.35; letter-spacing: -0.03em;">Proof는 흩어진 기록을<br>나만의 <span class="text-gradient">자기이해 Map</span>으로 업데이트합니다.</h2>
   </div>
 
   <!-- 1: 텍스트 왼쪽 / 이미지 오른쪽 -->
@@ -1324,7 +1336,7 @@
   <!-- 2: 이미지 왼쪽 / 텍스트 오른쪽 -->
   <div class="feature-row reverse">
     <div class="feature-text">
-      <div class="feature-title">AI가 반복되는<br>회피 루프를<br>찾아냅니다.</div>
+      <div class="feature-title">AI가 반복되는<br><span class="text-coral">회피 루프</span>를<br>찾아냅니다.</div>
       <div class="feature-desc">불확실성, 완벽주의, 시작 지연, 자책처럼 반복해서 등장하는 트리거와 행동 패턴을 분석합니다. 내가 왜 같은 방식으로 무너지는지 구조로 보여줍니다.</div>
     </div>
     <div class="feature-image">
@@ -1335,7 +1347,7 @@
   <!-- 3: 텍스트 왼쪽 / 이미지 오른쪽 -->
   <div class="feature-row">
     <div class="feature-text">
-      <div class="feature-title">매일의<br>행동강령으로<br>바뀝니다.</div>
+      <div class="feature-title">매일의<br><span class="text-gradient">행동강령</span>으로<br>바뀝니다.</div>
       <div class="feature-desc">Proof는 단순히 분석만 하지 않습니다. 오늘 발견한 패턴을 바탕으로 내일 바로 실행할 수 있는 한 줄 행동 규칙을 제안합니다.</div>
     </div>
     <div class="feature-image">
@@ -1346,7 +1358,7 @@
   <!-- 4: 이미지 왼쪽 / 텍스트 오른쪽 -->
   <div class="feature-row reverse">
     <div class="feature-text">
-      <div class="feature-title">나의 패턴이<br>자기이해 Map으로<br>저장됩니다.</div>
+      <div class="feature-title">나의 패턴이<br><span class="text-gradient">자기이해 Map</span>으로<br>저장됩니다.</div>
       <div class="feature-desc">한 번의 리포트로 끝나지 않습니다. 기록이 쌓일수록 나의 회피 루프, 몰입 조건, 위험 신호, 강점이 계속 업데이트됩니다.</div>
     </div>
     <div class="feature-image">
@@ -1358,7 +1370,7 @@
 <!-- ═══ RESULT ═══ -->
 <section class="section result-bg">
   <div class="section-label">The Result</div>
-  <h2 class="section-title">성찰이<br>행동강령으로 바뀝니다</h2>
+  <h2 class="section-title">성찰이<br><span class="text-gradient">행동강령</span>으로 바뀝니다</h2>
   <div class="result-card">
     <div class="result-card-title">기록할수록 나를 더 잘 이해하고,<br><span>피드백할수록 행동강령이 더 정확해집니다</span></div>
     <ul class="result-list">
@@ -1440,8 +1452,8 @@
       <div class="stat-label">하루 기록에 필요한 시간</div>
     </div>
     <div class="stat-card">
-      <div class="stat-num">7일</div>
-      <div class="stat-label">내 반복 패턴을 확인해보는 첫 테스트 기간</div>
+      <div class="stat-num">무료</div>
+      <div class="stat-label">초기 신청에 필요한 비용</div>
     </div>
   </div>
 </section>
@@ -1449,10 +1461,10 @@
 <!-- ═══ FINAL CTA ═══ -->
 <section class="cta-section">
   <div class="section-label">Limited Beta</div>
-  <h2 class="section-title">나를 바꾸고 싶다면,<br>먼저 내가 어떻게 무너지는지 봐야 합니다.</h2>
+  <h2 class="section-title">나를 바꾸고 싶다면,<br>먼저 내가 <span class="text-coral">어떻게 무너지는지</span> 봐야 합니다.</h2>
   <p class="section-body">더 이상 매번 같은 실패를 처음 겪는 것처럼 넘기지 마세요. Proof는 당신의 기록을 바탕으로 반복 패턴을 찾고, 매일의 행동강령으로 업데이트합니다.</p>
   <button class="cta-btn" onclick="openModal()">내 자기이해 Map 만들기</button>
-  <p class="cta-sub">선착순 체험단 모집 · 비용 없음 · 7일 기록 테스트</p>
+  <p class="cta-sub">선착순 무료 신청 · 비용 없음 · 출시 전 사전 접수</p>
 </section>
 
 <!-- ═══ FOOTER ═══ -->
@@ -1473,7 +1485,7 @@
 <div class="fixed-bar" id="fixedBar">
   <div class="fixed-bar-text">
     <strong>무료 체험단 모집 중</strong>
-    7일간 내 반복 패턴과 행동강령을 받아보세요
+    출시 전 무료 신청을 받고 있어요
   </div>
   <button class="fixed-bar-btn" onclick="openModal()">참여하기</button>
 </div>
@@ -1507,8 +1519,8 @@
       <div class="success-icon">✓</div>
       <div class="success-title">신청 완료!</div>
       <div class="success-body">
-        24시간 내에 연락드릴게요.<br>
-        입력해주신 내용을 바탕으로<br>첫 반복 패턴과 행동강령을 정리해드릴게요.
+        무료 신청이 정상적으로 접수되었습니다.<br>
+        Proof 준비 소식이 생기면<br>안내드릴게요.
       </div>
     </div>
   </div>
